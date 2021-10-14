@@ -32,13 +32,15 @@ Test:
     reports:
       junit: build/test-results/test/TEST-*.xml
 
-heroku:
+Deploy:
  stage: deploy
  tags:
     - dalfcs_gitlab_docker_ci
  only:
  - main
  script:
+ - sudo apt-get update
+ - sudo apt-get install git
  - git remote add heroku https://heroku:$HEROKU_API_KEY@git.heroku.com/gradle-project.git
  - git push -f heroku main
 
