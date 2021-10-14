@@ -5,7 +5,7 @@ variables:
   GIT_STRATEGY: clone  
 
 before_script: 
-  - echo "Build, Test , Deploy"
+  - echo "Build, Test, Deploy"
 
 stages:
   - build
@@ -39,8 +39,7 @@ Deploy:
  only:
  - main
  script:
- - sudo apt-get update
- - sudo apt-get install git
+ - apt-get install git
  - git remote add heroku https://heroku:$HEROKU_API_KEY@git.heroku.com/gradle-project.git
  - git push -f heroku main
 
