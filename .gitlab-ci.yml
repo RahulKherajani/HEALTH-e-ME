@@ -1,0 +1,44 @@
+image: gradle:alpine
+
+variables: 
+  GRADLE_OPTS: "-Dorg.gradle.daemon=false"
+  GIT_STRATEGY: clone  
+
+before_script: 
+  - echo "Build, Test , Deploy"
+
+stages:
+  - build
+  - test
+  - deploy
+
+Build:
+  stage: build
+  tags:
+    - dalfcs_gitlab_docker_ci
+  script:
+    - echo "Building"
+    - ./gradlew build
+
+Test: 
+  stage: test
+  tags:
+    - dalfcs_gitlab_docker_ci
+  script:
+    - echo "Testing"
+    - ./gradlew test
+  artifacts:
+    when: always
+    reports:
+      junit: ./lib/build/test-results/test/TEST-*.xml
+
+heroku:
+ stage: deploy
+ only:
+ - main
+ script:
+ - git remote add heroku https://heroku:$HEROKU_API_KEY@git.heroku.com/gradle-project.git
+ - git push -f heroku main
+
+after_script: 
+  - echo "This Works!!!"
