@@ -4,6 +4,14 @@ plugins {
 	id 'java'
 }
 
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'com.healtheme.HealthemeApplication'
+        )
+    }
+}
+
 group = 'com.healtheme'
 version = '2.5.5'
 sourceCompatibility = '17'
