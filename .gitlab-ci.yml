@@ -41,8 +41,9 @@ Deploy:
  script:
  - apt-get update
  - apt-get install -y git
- - git remote add heroku https://heroku:$HEROKU_API_KEY@git.heroku.com/gradle-project.git
- - git push -f heroku main
+ - dpl --provider=heroku --app=$HEROKU_APP_STAGING --api-key=$HEROKU_API_KEY
+ #- git remote add heroku https://heroku:$HEROKU_API_KEY@git.heroku.com/gradle-project.git
+ #- git push -f heroku main
 
 after_script: 
   - echo "This Works!!!"
