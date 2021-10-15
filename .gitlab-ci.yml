@@ -11,7 +11,7 @@ stages:
   - deploy
 
 Build:
-  image: eclipse-temurin:17-jdk
+  image: openjdk:17-jdk-buster
   stage: build
   tags:
     - dalfcs_gitlab_docker_ci
