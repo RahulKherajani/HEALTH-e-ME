@@ -4,6 +4,15 @@ plugins {
 	id 'java'
 }
 
+jar {
+  manifest {
+    attributes(
+      'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
+      'Main-Class': 'com.healtheme.HealthemeApplication'
+    )
+  }
+}
+
 group = 'com.healtheme'
 version = '2.5.5'
 sourceCompatibility = '17'
@@ -24,5 +33,3 @@ dependencies {
 test {
 	useJUnitPlatform()
 }
-
-apply plugin: 'org.springframework.boot'
