@@ -1,3 +1,4 @@
+image: openjdk:17-jdk-buster
 variables: 
   GRADLE_OPTS: "-Dorg.gradle.daemon=false"
   GIT_STRATEGY: clone  
@@ -11,7 +12,6 @@ stages:
   - deploy
 
 Build:
-  image: openjdk:17-jdk-buster
   stage: build
   tags:
     - dalfcs_gitlab_docker_ci
@@ -20,7 +20,7 @@ Build:
     - ./gradlew build
 
 Test: 
-  image: eclipse-temurin:17-jdk
+  #image: eclipse-temurin:17-jdk
   stage: test
   tags:
     - dalfcs_gitlab_docker_ci
@@ -33,7 +33,6 @@ Test:
       junit: build/test-results/test/TEST-*.xml
 
 Deploy:
-  image: openjdk:17-jdk-buster
   stage: deploy
   tags:
     - dalfcs_gitlab_docker_ci
