@@ -33,7 +33,7 @@ Test:
       junit: build/test-results/test/TEST-*.xml
 
 Deploy:
-  image: ruby:latest
+  image: openjdk:17-jdk-buster
   stage: deploy
   tags:
     - dalfcs_gitlab_docker_ci
