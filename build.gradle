@@ -17,8 +17,12 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	runtimeOnly 'mysql:mysql-connector-java'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	classpath("org.springframework.boot:spring-boot-gradle-plugin:2.5.5")
 }
+
 
 test {
 	useJUnitPlatform()
 }
+
+apply plugin: 'org.springframework.boot'
