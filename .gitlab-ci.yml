@@ -1,4 +1,5 @@
-image: openjdk:17-jdk-buster
+image: eclipse-temurin:17-jdk
+#image: openjdk:17-jdk-buster
 variables: 
   GRADLE_OPTS: "-Dorg.gradle.daemon=false"
   GIT_STRATEGY: clone  
@@ -17,7 +18,7 @@ Build:
     - dalfcs_gitlab_docker_ci
   script:
     - echo "Building"
-    - ./gradlew clean build
+    - ./gradlew build
 
 Test: 
   #image: eclipse-temurin:17-jdk
@@ -26,7 +27,7 @@ Test:
     - dalfcs_gitlab_docker_ci
   script:
     - echo "Testing"
-    - ./gradlew clean test
+    - ./gradlew test
   artifacts:
     when: always
     reports:
