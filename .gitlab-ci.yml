@@ -9,9 +9,10 @@ before_script:
 stages:
   - build
   - test
-  - deploy
+  - deploy-test
+  - deploy-prod
 
-Build:
+build:
   stage: build
   tags:
     - dalfcs_gitlab_docker_ci
@@ -19,7 +20,7 @@ Build:
     - echo "Building"
     - ./gradlew build
 
-Test: 
+test: 
   stage: test
   tags:
     - dalfcs_gitlab_docker_ci
@@ -31,8 +32,21 @@ Test:
     reports:
       junit: build/test-results/test/TEST-*.xml
 
-Deploy:
-  stage: deploy
+deployTest:
+  stage: deploy-test
+  tags:
+    - dalfcs_gitlab_docker_ci
+  only:
+    - test
+  script:
+    - apt-get update
+    - apt-get install -y git
+    - apt-get install -y ruby-dev
+    - gem install dpl
+    - dpl --provider=heroku --app=$HEROKU_APP_TESTING --api-key=$HEROKU_API_KEY
+
+deployProd:
+  stage: deploy-prod
   tags:
     - dalfcs_gitlab_docker_ci
   only:
@@ -42,7 +56,7 @@ Deploy:
     - apt-get install -y git
     - apt-get install -y ruby-dev
     - gem install dpl
-    - dpl --provider=heroku --app=$HEROKU_APP_TESTING --api-key=$HEROKU_API_KEY
+    - dpl --provider=heroku --app=$HEROKU_APP_PRODUCTION --api-key=$HEROKU_API_KEY
 
 after_script: 
   - echo "This Works!!!"
