@@ -42,7 +42,7 @@ Deploy:
     - apt-get install -y git
     - apt-get install -y ruby-dev
     - gem install dpl
-    - dpl --provider=heroku --app=$HEROKU_APP_STAGING --api-key=$HEROKU_API_KEY
+    - dpl --provider=heroku --app=$HEROKU_APP_TESTING --api-key=$HEROKU_API_KEY
 
 after_script: 
   - echo "This Works!!!"
