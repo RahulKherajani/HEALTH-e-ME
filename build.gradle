@@ -4,13 +4,8 @@ plugins {
 	id 'java'
 }
 
-task fatJar(type: Jar) {
-    manifest {
-        attributes 'Main-Class': "com.healtheme.HealthemeApplication"
-    }
-    archiveBaseName = "HEALTHEME"
-    from { configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
-    with jar
+jar {
+    enabled = false
 }
 
 group = 'com.healtheme'
