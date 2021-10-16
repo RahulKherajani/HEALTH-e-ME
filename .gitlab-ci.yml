@@ -1,5 +1,4 @@
 image: eclipse-temurin:17-jdk
-#image: openjdk:17-jdk-buster
 variables: 
   GRADLE_OPTS: "-Dorg.gradle.daemon=false"
   GIT_STRATEGY: clone  
@@ -21,7 +20,6 @@ Build:
     - ./gradlew build
 
 Test: 
-  #image: eclipse-temurin:17-jdk
   stage: test
   tags:
     - dalfcs_gitlab_docker_ci
@@ -45,10 +43,6 @@ Deploy:
     - apt-get install -y ruby-dev
     - gem install dpl
     - dpl --provider=heroku --app=$HEROKU_APP_STAGING --api-key=$HEROKU_API_KEY
-    #- apt-get update
-    #- apt-get install -y git
-    #- git remote add heroku https://heroku:$HEROKU_API_KEY@git.heroku.com/gradle-project.git
-    #- git push -f heroku HEAD:main
 
 after_script: 
   - echo "This Works!!!"
