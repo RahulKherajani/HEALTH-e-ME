@@ -9,7 +9,7 @@ before_script:
 stages:
   - build
   - test
-  - deploy-test
+  - deploy-dev
   - deploy-prod
 
 build:
@@ -32,12 +32,12 @@ test:
     reports:
       junit: build/test-results/test/TEST-*.xml
 
-deployTest:
-  stage: deploy-test
+deployDev:
+  stage: deploy-dev
   tags:
     - dalfcs_gitlab_docker_ci
   only:
-    - test
+    - dev
   script:
     - apt-get update
     - apt-get install -y git
